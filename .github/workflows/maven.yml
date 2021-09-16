@@ -21,7 +21,7 @@ jobs:
       run: mvn -B package
     - name: Set version
       run: |
-        echo "version=$(mvn org.apache.maven.plugins:maven-help-plugin:2.1.1:evaluate -Dexpression=project.version | grep -Ev '(^\[|Download\w+:)')"
+        echo "version=$(mvn -B org.apache.maven.plugins:maven-help-plugin:2.1.1:evaluate -Dexpression=project.version 2> /dev/null | grep -Ev '(^\[|Download\w+:)')"
     # - name: Create Release
     #   id: create_release
     #   uses: actions/create-release@v1
