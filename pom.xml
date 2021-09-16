@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>de.ams.itoperations</groupId>
     <artifactId>teamcity_finish_build_hook_plugin</artifactId>
-    <version>0.2</version>
+    <version>0.3</version>
     <packaging>pom</packaging>
     <properties>
         <teamcity-version>2020.2.2</teamcity-version>

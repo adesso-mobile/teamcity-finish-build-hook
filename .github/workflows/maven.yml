@@ -40,5 +40,5 @@ jobs:
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: ./target/teamcity_finish_build_hook_plugin.zip
-        asset_name: teamcity-finish-build-hook-plugin.jar
+        asset_name: teamcity-finish-build-hook-plugin.zip
         asset_content_type: application/zip
