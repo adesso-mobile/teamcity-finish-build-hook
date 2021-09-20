@@ -17,16 +17,22 @@ public class FinishBuildExecutor extends AgentLifeCycleAdapter {
 
     public FinishBuildExecutor(BuildAgent buildAgent, EventDispatcher<AgentLifeCycleAdapter> eventDispatcher) {
         eventDispatcher.addListener(this);
+
+        LOG.info("--------------------------------------------------------------------------------");
+        LOG.info("--------------------------------------------------------------------------------");
+        LOG.info("-----------------------Loading Finish Build Hook Plugin-------------------------");
+        LOG.info("--------------------------------------------------------------------------------");
+        LOG.info("--------------------------------------------------------------------------------");
     }
 
     @Override
     public void buildFinished(AgentRunningBuild build, BuildFinishedStatus buildStatus) {
-        super.buildFinished(build, buildStatus);
-
         final String homeDirectory = System.getProperty("user.home");
 
         String cmd = homeDirectory + "/.finish_build_hook";
         Runtime run = Runtime.getRuntime();
+
+        LOG.info("Executing: " + cmd);
         try {
             Process process = run.exec(cmd);
             process.waitFor();
