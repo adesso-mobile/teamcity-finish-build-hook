@@ -4,7 +4,7 @@
   <parent>
     <artifactId>teamcity_finish_build_hook_plugin</artifactId>
     <groupId>de.ams.itoperations</groupId>
-    <version>0.3</version>
+    <version>0.4.0-SNAPSHOT</version>
   </parent>
   <artifactId>teamcity_finish_build_hook_plugin-common</artifactId>
   <packaging>jar</packaging>
