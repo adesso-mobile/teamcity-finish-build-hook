@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import com.intellij.openapi.diagnostic.Logger;
 
 import jetbrains.buildServer.agent.AgentLifeCycleAdapter;
+import jetbrains.buildServer.agent.AgentLifeCycleListener;
 import jetbrains.buildServer.agent.AgentRunningBuild;
 import jetbrains.buildServer.agent.BuildAgent;
 import jetbrains.buildServer.agent.BuildFinishedStatus;
@@ -15,7 +16,7 @@ import jetbrains.buildServer.util.EventDispatcher;
 public class FinishBuildExecutor extends AgentLifeCycleAdapter {
     private static final Logger LOG = Logger.getInstance(FinishBuildExecutor.class.getName());
 
-    public FinishBuildExecutor(BuildAgent buildAgent, EventDispatcher<AgentLifeCycleAdapter> eventDispatcher) {
+    public FinishBuildExecutor(BuildAgent buildAgent, EventDispatcher<AgentLifeCycleListener> eventDispatcher) {
         eventDispatcher.addListener(this);
 
         LOG.info("--------------------------------------------------------------------------------");
