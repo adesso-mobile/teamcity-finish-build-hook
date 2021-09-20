@@ -21,7 +21,7 @@ jobs:
       run: mvn -B package
     - name: Build checksum
       run: |
-        sha512sum ./target/teamcity_finish_build_hook_plugin.zip | cut -f1 -d" " ">> ./target/teamcity_finish_build_hook_plugin.zip.sha512
+        sha512sum ./target/teamcity_finish_build_hook_plugin.zip | cut -f1 -d" " >> ./target/teamcity_finish_build_hook_plugin.zip.sha512
     - name: Set version
       run: |
         echo "version=$(mvn -B org.apache.maven.plugins:maven-help-plugin:2.1.1:evaluate -Dexpression=project.version 2> /dev/null | grep -Ev '(^\[|Download\w+:)')" >> "$GITHUB_ENV"
