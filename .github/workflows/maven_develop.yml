@@ -24,6 +24,7 @@ jobs:
         sha512sum ./target/teamcity_finish_build_hook_plugin.zip | cut -f1 -d" " >> ./target/teamcity_finish_build_hook_plugin.zip.sha512
     - name: Set version
       run: |
+        git pull --tags
         export snapshot_version="$(mvn -B org.apache.maven.plugins:maven-help-plugin:2.1.1:evaluate -Dexpression=project.version 2> /dev/null | grep -Ev '(^\[|Download\w+:)')"
         export version="${snapshot_version%-SNAPSHOT}"
         dev_version="${version}-dev.$(( $(while read v; do echo "${v##*.}"; done<<<"$(git tag | grep "${version}-dev.")" | sort -h | tail -n1) + 1 ))"
