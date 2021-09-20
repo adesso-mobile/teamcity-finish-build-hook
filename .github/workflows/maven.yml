@@ -19,6 +19,9 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: mvn -B package
+    - name: Build checksum
+      run: |
+        sha512sum ./target/teamcity_finish_build_hook_plugin.zip | cut -f1 -d" " ">> ./target/teamcity_finish_build_hook_plugin.zip.sha512
     - name: Set version
       run: |
         echo "version=$(mvn -B org.apache.maven.plugins:maven-help-plugin:2.1.1:evaluate -Dexpression=project.version 2> /dev/null | grep -Ev '(^\[|Download\w+:)')" >> "$GITHUB_ENV"
@@ -32,8 +35,8 @@ jobs:
         release_name: Release ${{ env.version }}
         draft: false
         prerelease: false
-    - name: Upload Release Asset
-      id: upload-release-asset 
+    - name: Upload Release Asset zip
+      id: upload-release-asset-zip
       uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -42,3 +45,13 @@ jobs:
         asset_path: ./target/teamcity_finish_build_hook_plugin.zip
         asset_name: teamcity-finish-build-hook-plugin.zip
         asset_content_type: application/zip
+    - name: Upload Release Asset Hash
+      id: upload-release-asset-checksum
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./target/teamcity_finish_build_hook_plugin.zip.sha512
+        asset_name: teamcity-finish-build-hook-plugin.zip.sha512
+        asset_content_type: text/plain
